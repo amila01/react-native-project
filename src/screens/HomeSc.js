@@ -59,9 +59,7 @@ export default function HomeScreen() {
   
   const startRecording = async () => {
     setFetchData(true)
-    console.log('setRecording:',recording)
     setRecording(true);
-    console.log('setRecording--------:',recording)
     Tts.stop(); 
     try {
       await Voice.start('en-GB');
@@ -72,11 +70,9 @@ export default function HomeScreen() {
 
   const stopRecording = async () => {
     try {
-      console.log('stopRecording1')
       await Voice.stop();
       setRecording(false);
       fetchResponse();
-      console.log('stopRecording2')
     } catch (error) {
       console.log('errors', error);
     }
@@ -281,11 +277,12 @@ export default function HomeScreen() {
               />
             </TouchableOpacity>
           )}
-          {
+           {
+            messages.length>0 && (
             <TouchableOpacity style={styles.clear_btn} onPress={clear}>
               <Text style={styles.clear_btn_txt}>Clear</Text>
             </TouchableOpacity>
-          }
+          )}
           {speaking && (
             <TouchableOpacity onPress={stopSpeaking} style={styles.speak_btn}>
               <Text style={styles.clear_btn_txt}>Stop</Text>
